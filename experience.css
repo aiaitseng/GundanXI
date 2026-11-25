@@ -1,0 +1,80 @@
+/* Exhibits share the archive palette; motion is limited to active exhibits. */
+.hero-grid>* {min-width:0}
+@media(max-width:1024px){.hero-grid{grid-template-columns:minmax(0,1fr)}}
+.interactive-hangar {isolation:isolate;--pan-x:0px;--pan-y:0px}
+.interactive-hangar>img {transform:translate(var(--pan-x),var(--pan-y)) scale(1.035);transition:transform .3s ease-out}
+.hangar-telemetry {position:absolute;left:16px;right:16px;top:16px;padding:9px 12px;background:#081122d9;border-left:2px solid #7dd3fc;font:500 12px var(--font-mono);z-index:2}
+.hangar-telemetry>span:last-child {display:block;color:#e6d28a;font-size:11px;margin-top:3px}
+.hangar-beacon {display:inline-block;width:6px;height:6px;border-radius:50%;background:#86efac;margin-right:7px;box-shadow:0 0 10px #86efac}
+.hangar-inspect {position:absolute;bottom:16px;right:16px;z-index:2;background:#081122dd;border:1px solid #7dd3fc;color:#e0f2fe;border-radius:4px;padding:10px 16px;cursor:pointer;min-height:44px}
+.hangar-scan {position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 40%,#7dd3fc33 49%,#bae6fd 50%,transparent 51%);opacity:0;z-index:1}
+.is-scanning .hangar-scan {animation:hangar-scan 1.7s ease-out 1}
+@keyframes hangar-scan {0%{transform:translateY(-75%);opacity:0}15%,80%{opacity:.8}100%{transform:translateY(75%);opacity:0}}
+#modal-media-frame {isolation:isolate}
+#modal-media-frame[data-overdrive=true]>img {filter:saturate(1.2);transition:filter .4s}
+#signature-effect {position:absolute;inset:0;pointer-events:none;z-index:3;color:var(--signature-color);background:radial-gradient(ellipse at 50% 50%,transparent 35%,color-mix(in srgb,var(--signature-color) 20%,transparent));}
+.signature-art {width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;filter:drop-shadow(0 0 6px currentColor);animation:signature-awaken 1.4s ease-out both}
+.sig-bit {fill:currentColor;fill-opacity:.25;transform-origin:160px 120px;animation:bit-deploy 1.2s both;animation-delay:calc(var(--i)*45ms)}
+.signature-label {position:absolute;bottom:10px;left:10px;right:10px;background:#081122e8;border-left:3px solid currentColor;padding:7px 12px;font-size:12px}
+@keyframes signature-awaken {from{opacity:0;transform:scale(.75)}to{opacity:1;transform:scale(1)}}
+@keyframes bit-deploy {from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+.weapon-explorer {margin:16px 0;border:1px solid var(--border-hairline);border-radius:8px;background:#0b1930;padding:16px}
+.weapon-explorer-head {display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:14px}
+.weapon-explorer-head>span {font-size:11px;color:#cbd5e1}
+.weapon-explorer-grid {display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:10px}
+#hotspot-map {position:relative;width:100%;max-width:320px;margin:auto;aspect-ratio:320/260;background:radial-gradient(ellipse,#1e407144,transparent 70%)}
+#hotspot-map svg {width:100%;height:100%}
+.weapon-hotspot {position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;border:1px solid #7dd3fc;color:#e0f2fe;background:#081122e8;cursor:pointer;z-index:2;font-weight:700}
+.weapon-hotspot[aria-pressed=true] {background:#1d4ed8;border:2px solid #fef08a;box-shadow:0 0 18px #38bdf866}
+#hotspot-detail h4 {font-size:15px;margin:5px 0 10px}#hotspot-detail p {font-size:12px;line-height:1.8;margin:8px 0;color:#d8e5f3}
+.hotspot-category,.hotspot-range {color:#7dd3fc!important;font-size:12px}
+#hotspot-list {display:flex;flex-wrap:wrap;gap:6px}
+#hotspot-list button,.battle-controls button {border:1px solid #53789e;border-radius:4px;background:#132b49;color:#fef9c3;padding:10px 12px;min-height:44px;cursor:pointer;font:inherit;font-size:12px}
+#hotspot-list button[aria-pressed=true] {background:#1d4ed8;border-color:#7dd3fc}
+.battle-entry {display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid var(--border-hairline);padding:24px 28px;background:linear-gradient(110deg,#142d4e,#0b1930)}
+.battle-entry p {font-size:13px;margin:5px 0 0;color:#cbd5e1}
+.battle-entry button {flex-shrink:0;min-height:48px;cursor:pointer}
+body.battle-open {overflow:hidden}
+#battle-dialog {width:min(1000px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;padding:0;border:1px solid #527fa6;border-radius:12px;color:#fef9c3;background:#081122;box-shadow:0 24px 100px #000b}
+#battle-dialog::backdrop {background:#020817dc;backdrop-filter:blur(5px)}
+.battle-video-stage {aspect-ratio:16/9;background:#030812;display:grid;place-items:center;max-height:55dvh;overflow:hidden}
+#battle-video {width:100%;height:100%;max-height:55dvh;object-fit:contain;background:#000}
+#battle-video[hidden],#battle-video-empty[hidden] {display:none}
+#battle-video-empty {padding:32px 20px;text-align:center;color:#d8e5f3}
+#battle-video-empty>span {font-size:clamp(20px,4vw,30px);color:#7dd3fc;font-weight:700}
+#battle-video-empty p {font-size:13px;margin-bottom:0}
+.battle-controls button[aria-pressed=true] {border-color:#fef08a;background:#1d4ed8}
+.battle-heading {padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #28435f}
+.battle-heading p {font-size:12px;color:#7dd3fc;margin:0 0 6px}.battle-heading h3 {font-size:clamp(16px,2vw,23px);margin:0;line-height:1.5}.battle-heading button{flex-shrink:0;min-height:44px}
+#battle-arena {position:relative;background:radial-gradient(ellipse at 50% 30%,#1c3759,#070f20);overflow:hidden}
+#battle-arena>svg {display:block;width:100%;max-height:48dvh}
+.battle-shot,.battle-slash,.battle-impact {opacity:0;transform-box:fill-box;transform-origin:center}
+.battle-side {position:absolute;bottom:12px;font:12px var(--font-mono);padding:5px 8px;background:#081122bb}.battle-side.left {left:12px;color:#7dd3fc}.battle-side.right {right:12px;color:#fda4af}
+#battle-arena[data-attacker=right] .battle-slash {transform:scaleX(-1)}
+#battle-status {min-height:52px;padding:12px 24px;margin:0;font-size:14px;color:#e0f2fe;border-block:1px solid #28435f}
+.battle-controls {display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px 24px}
+.battle-controls[hidden] {display:none}
+.battle-footer {padding-top:16px}
+.battle-controls fieldset {min-width:0;border:1px solid #335c80;border-radius:6px;padding:12px;display:flex;flex-wrap:wrap;gap:8px}
+.battle-controls fieldset:last-child {border-color:#804258}.battle-controls legend {font-size:12px;color:#7dd3fc;padding:0 6px}.battle-controls fieldset:last-child legend {color:#fda4af}
+.battle-controls button {flex:1}.battle-controls button:disabled {opacity:.4;cursor:not-allowed}
+.battle-footer {padding:0 24px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}.battle-footer>span {font-size:11px;color:#cbd5e1}.battle-footer button {min-height:44px}
+.battle-footer [hidden] {display:none}
+.weapon-explorer button:focus-visible,.hangar-inspect:focus-visible,#battle-dialog button:focus-visible {outline:3px solid #fef08a;outline-offset:3px}
+@media(max-width:600px) {
+ .battle-entry {align-items:stretch;flex-direction:column;padding:20px}.battle-entry button {width:100%}
+ #battle-dialog {width:calc(100% - 16px);max-height:calc(100dvh - 16px)}
+ .battle-heading {padding:14px}.battle-controls {padding:12px;gap:8px}.battle-controls fieldset {padding:8px}.battle-controls button {flex-basis:100%}
+ #battle-status {padding:12px 14px;font-size:12px}.battle-footer {padding:0 14px 14px;gap:10px}
+ .weapon-explorer {padding:12px}.weapon-explorer-grid {grid-template-columns:1fr}.weapon-explorer-grid #hotspot-map {max-width:280px;margin:auto}
+ .hangar-telemetry {left:10px;right:10px;top:10px;font-size:11px}.hangar-inspect {bottom:10px;right:10px;font-size:12px}
+ body {background-attachment:scroll}
+ .signature-art {filter:none}
+}
+@media(prefers-reduced-motion:reduce) {
+ html {scroll-behavior:auto!important}
+ .interactive-hangar>img {transform:none;transition:none}
+ .hangar-scan,.signature-art,.sig-bit {animation:none!important}
+ .is-scanning .hangar-scan {opacity:.25}
+ #signature-effect {transition:none}
+}

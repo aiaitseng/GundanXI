@@ -1,3 +1,5 @@
+import { initExperience } from './experience.js';
+
 /**
  * MS ARCHIVE — Universal Century Mobile Suit Interactive Application
  * Written in pure Vanilla ES6+ JavaScript (zero framework runtime required).
@@ -3180,6 +3182,7 @@ function renderModalContent() {
   }
 
   syncModalRadarOverlay();
+  experience.renderSuit(suit, isOver);
 }
 
 /**
@@ -6766,4 +6769,13 @@ function init() {
   bindEvents();
 }
 
+const experience = initExperience({
+  getSuit: getSuitById,
+  getScalePair: () => [getSuitById(state.scaleA), getSuitById(state.scaleB)],
+  silhouette: getNormalizedSuitSilhouette,
+  onWeapon: (index) => {
+    state.modalRadarWeapons = new Set([index]);
+    syncModalRadarOverlay();
+  },
+});
 init();
